@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:18:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/27 14:04:05 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/28 01:11:42 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ typedef struct s_philo
 	long				last_eat;
 	pthread_mutex_t		*left_fork;
 	pthread_mutex_t		*right_fork;
-	pthread_mutex_t		*print;
-	pthread_mutex_t		*eat_mutex;
+	pthread_mutex_t		*print_mutex;
 	pthread_mutex_t		*dead_mutex;
+	pthread_mutex_t		*eat_mutex;
 	t_data				*data;
 }						t_philo;
 
@@ -65,9 +65,9 @@ struct					s_data
 	bool				died_flag;
 	int					start_time;
 	pthread_mutex_t		forks[MAX_PHILO];
-	pthread_mutex_t		print;
-	pthread_mutex_t		eat_mutex;
+	pthread_mutex_t		print_mutex;
 	pthread_mutex_t		dead_mutex;
+	pthread_mutex_t		eat_mutex;
 	t_philo				philo[MAX_PHILO];
 };
 
@@ -87,4 +87,6 @@ void					destroy_mutex(t_data *data);
 void					*philo_routine(void *philo);
 void					*monitor_routine(void *philo);
 void					start_threads(t_data *data);
+bool					check_philo_eat_status(t_data *data);
+bool					check_philo_died(t_data *data);
 #endif

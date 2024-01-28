@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:29:37 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/27 13:59:08 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/27 23:37:31 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	print_message(t_philo *philo, int message_type)
 {
 	int	current_time;
 
-	pthread_mutex_lock(philo->print);
+	pthread_mutex_lock(philo->print_mutex);
 	current_time = get_current_time() - philo->data->start_time;
 	if (message_type == EAT)
 		printf(YELLOW "%d" RESET " %d is eating\n", current_time, philo->id);
@@ -78,7 +78,7 @@ void	print_message(t_philo *philo, int message_type)
 			philo->id);
 	else if (message_type == OVER)
 		printf("All philosophers have eaten enough\n");
-	pthread_mutex_unlock(philo->print);
+	pthread_mutex_unlock(philo->print_mutex);
 }
 
 int	ft_min(int a, int b)

@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:29:05 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/27 12:58:12 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/28 01:13:02 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	parse_args(int ac, char **av, t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (++i < ac)
@@ -28,6 +28,11 @@ void	parse_args(int ac, char **av, t_data *data)
 		else if (i == 4)
 			data->time_to_sleep = ft_atoi(av[i]);
 		else if (i == 5)
-			data->num_of_eat = ft_atoi(av[i]);
+		{
+			if (ac == 6)
+				data->num_of_eat = ft_atoi(av[i]);
+			else
+				data->num_of_eat = 0;
+		}
 	}
 }
