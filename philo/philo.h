@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:18:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/29 05:33:09 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/29 07:14:24 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # define MAX_PHILO 200
 # define EXIT_FAILURE 1
 # define EXIT_SUCCESS 0
-
 // Escape code colors
 # define RESET "\033[0m"
 # define RED "\033[31m"
@@ -90,4 +89,9 @@ bool					check_any_philo_died(t_data *data);
 bool					dead_loop(t_data *data);
 void					print_error_exit(char *error_message);
 void					check_input_error(t_data *data);
+void					philo_eat(t_philo *ph);
+void					philo_think(t_philo *ph);
+void					philo_sleep(t_philo *ph);
+void					philo_release_forks(t_philo *ph);
+void					philo_take_forks(t_philo *ph);
 #endif

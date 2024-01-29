@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:34:10 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/29 05:49:32 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/29 07:15:33 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,15 @@ bool	check_any_philo_died(t_data *data)
 
 void	check_input_error(t_data *data)
 {
-	int	i;
+	int		i;
+	char	*s;
 
+	s = "number_of_philosophers should be between 1 and 200 (inclusive).\n";
 	i = 0;
 	while (++i < 5)
 	{
 		if (i == 1 && (data->num_of_philo == 0 || data->num_of_philo > 200))
-			print_error_exit("number_of_philosophers should be between 1 and 200 (inclusive).\n");
+			print_error_exit(s);
 		else if (i == 2 && data->time_to_die < 60)
 			print_error_exit("time_to_die should be larger than 60ms.\n");
 		else if (i == 3 && data->time_to_eat < 60)
@@ -87,16 +89,4 @@ void	check_input_error(t_data *data)
 		else if (i == 4 && data->time_to_sleep < 60)
 			print_error_exit("time_to_sleep should be larger than 60ms.\n");
 	}
-}
-
-bool	dead_loop(t_data *data)
-{
-	pthread_mutex_lock(&data->sync_mutex);
-	if (check_any_philo_died(data) || check_all_philo_eat(data, true))
-	{
-		pthread_mutex_unlock(&data->sync_mutex);
-		return (false);
-	}
-	pthread_mutex_unlock(&data->sync_mutex);
-	return (true);
 }
