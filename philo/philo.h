@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:18:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/28 01:11:42 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/29 04:28:15 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,25 @@ typedef struct s_philo
 	int					id;
 	int					eat_count;
 	long				last_eat;
+	bool				is_dead;
 	pthread_mutex_t		*left_fork;
 	pthread_mutex_t		*right_fork;
+	pthread_mutex_t		*sync_mutex;
 	pthread_mutex_t		*print_mutex;
-	pthread_mutex_t		*dead_mutex;
-	pthread_mutex_t		*eat_mutex;
 	t_data				*data;
 }						t_philo;
 
 struct					s_data
 {
 	int					num_of_philo;
+	int					num_of_eat;
 	int					time_to_die;
 	int					time_to_eat;
 	int					time_to_sleep;
-	int					num_of_eat;
-	bool				died_flag;
 	int					start_time;
-	pthread_mutex_t		forks[MAX_PHILO];
+	pthread_mutex_t		sync_mutex;
 	pthread_mutex_t		print_mutex;
-	pthread_mutex_t		dead_mutex;
-	pthread_mutex_t		eat_mutex;
+	pthread_mutex_t		forks[MAX_PHILO];
 	t_philo				philo[MAX_PHILO];
 };
 
@@ -77,7 +75,7 @@ bool					ft_isdigit(int c);
 void					ft_usleep(int time);
 int						get_current_time(void);
 int						ft_atoi(const char *nptr);
-void					parse_args(int ac, char **av, t_data *data);
+void					init_data(int ac, char **av, t_data *data);
 int						ft_min(int a, int b);
 void					init_philo(t_data *data);
 void					print_message(t_philo *philo, int message_type);
@@ -87,6 +85,7 @@ void					destroy_mutex(t_data *data);
 void					*philo_routine(void *philo);
 void					*monitor_routine(void *philo);
 void					start_threads(t_data *data);
-bool					check_philo_eat_status(t_data *data);
-bool					check_philo_died(t_data *data);
+bool					check_all_philo_eat(t_data *data, bool print);
+bool					check_any_philo_died(t_data *data);
+bool					dead_loop(t_data *data);
 #endif

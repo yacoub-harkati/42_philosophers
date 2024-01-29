@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 13:19:11 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/28 01:41:45 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/29 05:07:49 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,18 @@
 
 void	philo_take_forks(t_philo *ph)
 {
-	
-		pthread_mutex_lock(ph->left_fork);
-		print_message(ph, FORK);
-		pthread_mutex_lock(ph->right_fork);
-		print_message(ph, FORK);
+	pthread_mutex_lock(ph->left_fork);
+	print_message(ph, FORK);
+	if (ph->data->num_of_philo == 1)
+	{
+		ft_usleep(ph->data->time_to_die);
+		ph->is_dead = true;
+		print_message(ph, DIED);
+		pthread_mutex_unlock(ph->sync_mutex);
+		return ;
+	}
+	pthread_mutex_lock(ph->right_fork);
+	print_message(ph, FORK);
 }
 
 void	philo_release_forks(t_philo *ph)
@@ -29,38 +36,38 @@ void	philo_release_forks(t_philo *ph)
 
 void	philo_sleep(t_philo *ph)
 {
-	pthread_mutex_lock(ph->dead_mutex);
-	if (!ph->data->died_flag)
+	if (!ph->is_dead)
 	{
 		print_message(ph, SLEEP);
 		ft_usleep(ph->data->time_to_sleep);
 	}
-	pthread_mutex_unlock(ph->dead_mutex);
 }
 
 void	philo_think(t_philo *ph)
 {
-	pthread_mutex_lock(ph->dead_mutex);
-	if (!ph->data->died_flag)
-	{
+	if (!ph->is_dead)
 		print_message(ph, THINK);
-	}
-	pthread_mutex_unlock(ph->dead_mutex);
 }
 
 void	philo_eat(t_philo *ph)
 {
-	pthread_mutex_lock(ph->eat_mutex);
-	pthread_mutex_lock(ph->dead_mutex);
-	if (!ph->data->died_flag)
+	philo_take_forks(ph);
+	pthread_mutex_lock(ph->sync_mutex);
+	if (get_current_time() - ph->last_eat > ph->data->time_to_die
+		&& !check_any_philo_died(ph->data))
 	{
-		ph->last_eat = get_current_time();
-		ph->eat_count++;
-		print_message(ph, EAT);
-		ft_usleep(ph->data->time_to_eat);
+		ph->is_dead = true;
+		print_message(ph, DIED);
+		pthread_mutex_unlock(ph->sync_mutex);
+		return ;
 	}
-	pthread_mutex_unlock(ph->dead_mutex);
-	pthread_mutex_unlock(ph->eat_mutex);
+	if (!ph->is_dead)
+		print_message(ph, EAT);
+	ph->last_eat = get_current_time();
+	ph->eat_count++;
+	pthread_mutex_unlock(ph->sync_mutex);
+	ft_usleep(ph->data->time_to_eat);
+	philo_release_forks(ph);
 }
 
 void	*philo_routine(void *philo)
@@ -70,11 +77,9 @@ void	*philo_routine(void *philo)
 	ph = (t_philo *)philo;
 	while (1)
 	{
-		philo_take_forks(ph);
-		philo_eat(ph);
-		philo_release_forks(ph);
-		philo_sleep(ph);
 		philo_think(ph);
+		philo_eat(ph);
+		philo_sleep(ph);
 	}
 	return (NULL);
 }

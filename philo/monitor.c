@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 13:24:49 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/28 01:00:22 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/29 03:16:24 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ void	*monitor_routine(void *data)
 	dt = (t_data *)data;
 	while (1)
 	{
-		if (!check_philo_eat_status(dt) || !check_philo_died(dt))
-			exit(EXIT_SUCCESS);
+		if (dead_loop(dt))
+			continue ;
+		exit(EXIT_SUCCESS);
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:34:10 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/28 01:25:31 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/29 04:31:43 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,59 +42,50 @@ void	check_is_number(char *str, int i)
 	}
 }
 
-bool	check_philo_eat_status(t_data *data)
+bool	check_all_philo_eat(t_data *data, bool print)
 {
 	int	i;
 
 	i = -1;
-	pthread_mutex_lock(&data->eat_mutex);
+	// if (!print)
+	// 	pthread_mutex_lock(&data->sync_mutex);
 	if (!data->num_of_eat)
-	{
-		pthread_mutex_unlock(&data->eat_mutex);
-		return (true);
-	}
+		return (false);
 	while (++i < data->num_of_philo)
 	{
-		if (data->philo[i].eat_count != data->num_of_eat)
-		{
-			pthread_mutex_unlock(&data->eat_mutex);
-			return (true);
-		}
+		if (data->philo[i].eat_count < data->num_of_eat)
+			return (false);
 	}
-	print_message(data->philo, OVER);
-	pthread_mutex_unlock(&data->eat_mutex);
-	return (false);
+	// if (!print)
+	// 	pthread_mutex_unlock(&data->sync_mutex);
+	if (print)
+		print_message(data->philo, OVER);
+	return (true);
 }
 
 bool	check_any_philo_died(t_data *data)
 {
-	int	i;
+	int		i;
+	t_philo	*philos;
 
 	i = -1;
-	pthread_mutex_lock(&data->eat_mutex);
+	philos = data->philo;
 	while (++i < data->num_of_philo)
 	{
-		if (get_current_time() - data->start_time
-			- data->philo[i].last_eat >= data->time_to_die)
-		{
-			print_message(data->philo + i, DIED);
-			pthread_mutex_unlock(&data->eat_mutex);
+		if (philos[i].is_dead == true)
 			return (true);
-		}
 	}
-	pthread_mutex_unlock(&data->eat_mutex);
 	return (false);
 }
 
-bool	check_philo_died(t_data *data)
+bool	dead_loop(t_data *data)
 {
-	pthread_mutex_lock(&data->dead_mutex);
-	if (check_any_philo_died(data))
+	pthread_mutex_lock(&data->sync_mutex);
+	if (check_any_philo_died(data) || check_all_philo_eat(data, true))
 	{
-		data->died_flag = true;
-		pthread_mutex_unlock(&data->dead_mutex);
+		pthread_mutex_unlock(&data->sync_mutex);
 		return (false);
 	}
-	pthread_mutex_unlock(&data->dead_mutex);
+	pthread_mutex_unlock(&data->sync_mutex);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:29:37 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/27 23:37:31 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/29 05:03:05 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_usleep(int time)
 
 	start = get_current_time();
 	while (get_current_time() - start < time)
-		usleep(100);
+		usleep(500);
 }
 
 bool	ft_isdigit(int c)
