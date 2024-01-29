@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:18:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/29 04:28:15 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/29 05:33:09 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,6 @@ void					start_threads(t_data *data);
 bool					check_all_philo_eat(t_data *data, bool print);
 bool					check_any_philo_died(t_data *data);
 bool					dead_loop(t_data *data);
+void					print_error_exit(char *error_message);
+void					check_input_error(t_data *data);
 #endif

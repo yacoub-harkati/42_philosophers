@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:59:05 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/29 02:18:41 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/29 05:33:21 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ void	init_data(int ac, char **av, t_data *data)
 				data->num_of_eat = 0;
 		}
 	}
+	check_input_error(data);
 	data->start_time = get_current_time();
 }

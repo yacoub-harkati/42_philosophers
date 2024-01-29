@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:29:37 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/29 05:03:05 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/29 05:33:48 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,11 @@ int	ft_max(int a, int b)
 	if (a > b)
 		return (a);
 	return (b);
+}
+
+void	print_error_exit(char *error_message)
+{
+	printf(RED "Error: " RESET);
+	printf("%s\n", error_message);
+	exit(EXIT_FAILURE);
 }
