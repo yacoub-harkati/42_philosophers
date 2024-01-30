@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:18:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/30 01:06:31 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:32:10 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ struct					s_data
 	int					time_to_eat;
 	int					time_to_sleep;
 	int					start_time;
+	int					finished_threads;
 	pthread_mutex_t		sync_mutex;
 	pthread_mutex_t		print_mutex;
+	pthread_mutex_t		end_mutex;
 	pthread_mutex_t		forks[MAX_PHILO];
 	t_philo				philo[MAX_PHILO];
 };

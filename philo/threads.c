@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 13:40:59 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/30 01:03:24 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:46:03 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	join_threads(pthread_t *th, t_data *data)
 {
-	int		i;
-	void	*status;
+	int	i;
 
 	i = -1;
 	while (++i < data->num_of_philo)
@@ -26,13 +25,12 @@ void	join_threads(pthread_t *th, t_data *data)
 			exit(EXIT_FAILURE);
 		}
 	}
-	if (pthread_join(th[MAX_PHILO], &status))
+	if (pthread_join(th[MAX_PHILO], NULL))
 	{
 		printf(RED "Error: " RESET "Failed to join monitor thread\n");
 		exit(EXIT_FAILURE);
 	}
-	if (status == NULL)
-		destroy_mutex(data);
+	destroy_mutex(data);
 }
 
 void	create_threads(pthread_t *th, t_data *data)

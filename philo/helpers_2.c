@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:29:05 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/29 21:14:55 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:55:01 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	print_message(t_philo *philo, int message_type)
 		printf(YELLOW "%d" RESET " %d has taken a fork\n", current_time,
 			philo->id);
 	else if (message_type == DIED)
-		printf(YELLOW "%d" RESET " %d " RED "died\n" RESET, current_time,
+		printf(YELLOW "%d" RESET " %d " RED "died\n" RESET, current_time - 1,
 			philo->id);
 	else if (message_type == OVER)
 		printf(YELLOW "%d All philosophers have eaten enough\n" RESET,

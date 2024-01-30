@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 13:19:11 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/30 01:00:29 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:54:19 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*philo_routine(void *philo)
 	t_philo	*ph;
 
 	ph = (t_philo *)philo;
+	if(ph->id % 2 == 0)
+		ft_usleep(5);
 	while (dead_loop(ph->data))
 	{
 		philo_eat(ph);

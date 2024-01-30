@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:59:05 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/30 00:33:51 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:54:52 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_mutex(t_data *data)
 		i++;
 	}
 	pthread_mutex_init(&data->sync_mutex, NULL);
+	pthread_mutex_init(&data->end_mutex, NULL);
 	pthread_mutex_init(&data->print_mutex, NULL);
 }
 
@@ -61,6 +62,7 @@ void	destroy_mutex(t_data *data)
 		i++;
 	}
 	pthread_mutex_destroy(&data->sync_mutex);
+	pthread_mutex_destroy(&data->end_mutex);
 	pthread_mutex_destroy(&data->print_mutex);
 }
 
@@ -75,7 +77,7 @@ void	init_data(int ac, char **av, t_data *data)
 		if (i == 1)
 			data->num_of_philo = ft_atoi(av[i]);
 		else if (i == 2)
-			data->time_to_die = ft_atoi(av[i]);
+			data->time_to_die = ft_atoi(av[i]) + 1;
 		else if (i == 3)
 			data->time_to_eat = ft_atoi(av[i]);
 		else if (i == 4)
