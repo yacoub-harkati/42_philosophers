@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 05:57:01 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/30 02:40:44 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/30 03:13:42 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	philo_take_forks(t_philo *ph)
 	{
 		ph->last_eat = get_current_time();
 		ft_usleep(ph->data->time_to_die);
+		return ;
 	}
 	pthread_mutex_lock(ph->right_fork);
 	print_message(ph, FORK);
