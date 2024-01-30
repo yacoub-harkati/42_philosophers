@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 13:24:49 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/30 01:05:43 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/30 03:55:56 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	dead_loop(t_data *data)
 {
-	if (check_any_philo_died(data) || check_all_philo_eat(data, false))
+	if (check_any_philo_died(data) || check_all_philo_eat(data, true))
 		return (false);
 	return (true);
 }
@@ -24,10 +24,7 @@ void	*monitor_routine(void *data)
 	t_data	*dt;
 
 	dt = (t_data *)data;
-	while (true)
-	{
-		if (check_any_philo_died(dt) || check_all_philo_eat(dt, true))
-			return (NULL);
-	}
-	return (dt);
+	while (dead_loop(dt))
+		continue ;
+	return (NULL);
 }
