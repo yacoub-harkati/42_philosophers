@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:34:10 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/29 07:15:33 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/30 00:32:19 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,16 @@ bool	check_all_philo_eat(t_data *data, bool print)
 	i = -1;
 	if (!data->num_of_eat)
 		return (false);
+	pthread_mutex_lock(&data->sync_mutex);
 	while (++i < data->num_of_philo)
 	{
 		if (data->philo[i].eat_count < data->num_of_eat)
+		{
+			pthread_mutex_unlock(&data->sync_mutex);
 			return (false);
+		}
 	}
+	pthread_mutex_unlock(&data->sync_mutex);
 	if (print)
 		print_message(data->philo, OVER);
 	return (true);
@@ -65,8 +70,21 @@ bool	check_any_philo_died(t_data *data)
 	philos = data->philo;
 	while (++i < data->num_of_philo)
 	{
+		pthread_mutex_lock(&data->sync_mutex);
 		if (philos[i].is_dead == true)
+		{
+			pthread_mutex_unlock(&data->sync_mutex);
 			return (true);
+		}
+		if (get_current_time()
+			- philos[i].last_eat > philos[i].data->time_to_die)
+		{
+			philos[i].is_dead = true;
+			pthread_mutex_unlock(&data->sync_mutex);
+			print_message(&philos[i], DIED);
+			return (true);
+		}
+		pthread_mutex_unlock(&data->sync_mutex);
 	}
 	return (false);
 }

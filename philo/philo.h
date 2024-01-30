@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:18:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/29 07:14:24 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/30 01:06:31 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define MAX_PHILO 200
+# define MAX_PHILO 300
 # define EXIT_FAILURE 1
 # define EXIT_SUCCESS 0
 // Escape code colors

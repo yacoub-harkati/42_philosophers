@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:59:05 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/29 06:23:08 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/01/30 00:33:51 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_philo(t_data *data)
 		data->philo[i].eat_count = 0;
 		data->philo[i].data = data;
 		data->philo[i].is_dead = false;
-		data->philo[i].last_eat = INT_MAX;
+		data->philo[i].last_eat = get_current_time();
 		data->philo[i].left_fork = data->forks + ft_min(left_i, right_i);
 		data->philo[i].right_fork = data->forks + ft_max(left_i, right_i);
 		data->philo[i].sync_mutex = &data->sync_mutex;
@@ -75,7 +75,7 @@ void	init_data(int ac, char **av, t_data *data)
 		if (i == 1)
 			data->num_of_philo = ft_atoi(av[i]);
 		else if (i == 2)
-			data->time_to_die = ft_atoi(av[i]) + 1;
+			data->time_to_die = ft_atoi(av[i]);
 		else if (i == 3)
 			data->time_to_eat = ft_atoi(av[i]);
 		else if (i == 4)
