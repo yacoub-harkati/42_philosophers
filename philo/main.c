@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:06:34 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/29 22:29:52 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/02 04:23:55 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ int	main(int ac, char **av)
 	init_mutex(&data);
 	init_philo(&data);
 	start_threads(&data);
+	// pthread_exit(NULL);
 	return (EXIT_SUCCESS);
 }

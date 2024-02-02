@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 13:40:59 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/30 03:55:16 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/02 04:19:54 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,20 @@
 void	join_threads(pthread_t *th, t_data *data)
 {
 	int	i;
-
-	i = -1;
 	
+	i = -1;
+	while (++i < data->num_of_philo)
+	{
+		 if (pthread_detach(th[i]))
+        {
+            printf(RED "Error: " RESET "Failed to detach thread\n");
+            exit(EXIT_FAILURE);
+        }
+	}
 	if (pthread_join(th[MAX_PHILO], NULL))
 	{
 		printf(RED "Error: " RESET "Failed to join monitor thread\n");
 		exit(EXIT_FAILURE);
-	}
-	while (++i < data->num_of_philo)
-	{
-		 if (pthread_join(th[i], NULL))
-        {
-            printf(RED "Error: " RESET "Failed to join thread\n");
-            exit(EXIT_FAILURE);
-        }
 	}
 	destroy_mutex(data);
 }

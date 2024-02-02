@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 13:19:11 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/30 03:08:19 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/02 04:22:31 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@ void	*philo_routine(void *philo)
 		ft_usleep(5);
 	while (dead_loop(ph->data))
 	{
-		philo_eat(ph);
-		if (ph->is_dead)
-			return (NULL);
-		philo_sleep(ph);
 		philo_think(ph);
+		philo_eat(ph);
+		philo_sleep(ph);
 	}
 	return (NULL);
 }
