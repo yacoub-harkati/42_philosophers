@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:34:10 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/30 02:52:52 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/02 23:05:36 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,21 @@ void	check_is_number(char *str, int i)
 	}
 }
 
-bool	check_all_philo_eat(t_data *data, bool print)
+bool	check_all_philo_eat(t_data *data)
 {
 	int	i;
 
 	i = -1;
 	if (!data->num_of_eat)
 		return (false);
-	pthread_mutex_lock(&data->sync_mutex);
 	while (++i < data->num_of_philo)
 	{
 		if (data->philo[i].eat_count < data->num_of_eat)
 		{
-			pthread_mutex_unlock(&data->sync_mutex);
 			return (false);
 		}
 	}
-	pthread_mutex_unlock(&data->sync_mutex);
-	if (print)
-		print_message(data->philo, OVER);
+	print_message(data->philo, OVER);
 	return (true);
 }
 
@@ -70,21 +66,17 @@ bool	check_any_philo_died(t_data *data)
 	philos = data->philo;
 	while (++i < data->num_of_philo)
 	{
-		pthread_mutex_lock(&data->sync_mutex);
 		if (philos[i].is_dead == true)
 		{
-			pthread_mutex_unlock(&data->sync_mutex);
 			return (true);
 		}
 		if (get_current_time()
 			- philos[i].last_eat >= philos[i].data->time_to_die)
 		{
 			philos[i].is_dead = true;
-			pthread_mutex_unlock(&data->sync_mutex);
 			print_message(&philos[i], DIED);
 			return (true);
 		}
-		pthread_mutex_unlock(&data->sync_mutex);
 	}
 	return (false);
 }

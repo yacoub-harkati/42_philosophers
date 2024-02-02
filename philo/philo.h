@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:18:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/30 02:32:10 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/02 23:05:49 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void					destroy_mutex(t_data *data);
 void					*philo_routine(void *philo);
 void					*monitor_routine(void *philo);
 void					start_threads(t_data *data);
-bool					check_all_philo_eat(t_data *data, bool print);
+bool					check_all_philo_eat(t_data *data);
 bool					check_any_philo_died(t_data *data);
 bool					dead_loop(t_data *data);
 void					print_error_exit(char *error_message);
