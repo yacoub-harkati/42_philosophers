@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:18:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/02/11 16:15:29 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/11 17:09:41 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILO_H
 # include <limits.h>
 # include <pthread.h>
+# include <fcntl.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -85,8 +86,8 @@ void					destroy_mutex(t_data *data);
 void					*philo_routine(void *philo);
 void					*monitor(void *philo);
 void					start_threads(t_data *data);
-bool					check_full_philo(t_data *data);
-bool					check_philo_died(t_data *data);
+// bool					check_full_philo(t_data *data);
+bool					check_philo(t_data *data);
 // bool					dead_loop(t_data *data);
 void					print_error_exit(char *error_message);
 void					check_input_error(t_data *data);
