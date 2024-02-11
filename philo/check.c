@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:34:10 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/02/02 23:05:36 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/11 14:51:41 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,48 +37,6 @@ void	check_is_number(char *str, int i)
 			exit(EXIT_FAILURE);
 		}
 	}
-}
-
-bool	check_all_philo_eat(t_data *data)
-{
-	int	i;
-
-	i = -1;
-	if (!data->num_of_eat)
-		return (false);
-	while (++i < data->num_of_philo)
-	{
-		if (data->philo[i].eat_count < data->num_of_eat)
-		{
-			return (false);
-		}
-	}
-	print_message(data->philo, OVER);
-	return (true);
-}
-
-bool	check_any_philo_died(t_data *data)
-{
-	int		i;
-	t_philo	*philos;
-
-	i = -1;
-	philos = data->philo;
-	while (++i < data->num_of_philo)
-	{
-		if (philos[i].is_dead == true)
-		{
-			return (true);
-		}
-		if (get_current_time()
-			- philos[i].last_eat >= philos[i].data->time_to_die)
-		{
-			philos[i].is_dead = true;
-			print_message(&philos[i], DIED);
-			return (true);
-		}
-	}
-	return (false);
 }
 
 void	check_input_error(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:59:05 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/02/02 23:06:30 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/11 15:42:57 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ void	init_mutex(t_data *data)
 void	init_philo(t_data *data)
 {
 	int	i;
+	int	init_timestamp;
 	int	left_i;
 	int	right_i;
 
 	i = 0;
+	init_timestamp = get_current_time();
 	while (i < data->num_of_philo)
 	{
 		left_i = i;
@@ -40,12 +42,9 @@ void	init_philo(t_data *data)
 		data->philo[i].id = i + 1;
 		data->philo[i].eat_count = 0;
 		data->philo[i].data = data;
-		data->philo[i].is_dead = false;
-		data->philo[i].last_eat = get_current_time();
+		data->philo[i].last_eat = init_timestamp;
 		data->philo[i].left_fork = data->forks + ft_min(left_i, right_i);
 		data->philo[i].right_fork = data->forks + ft_max(left_i, right_i);
-		data->philo[i].sync_mutex = &data->sync_mutex;
-		data->philo[i].print_mutex = &data->print_mutex;
 		i++;
 	}
 }
@@ -63,13 +62,11 @@ void	destroy_mutex(t_data *data)
 	pthread_mutex_destroy(&data->sync_mutex);
 	pthread_mutex_destroy(&data->print_mutex);
 }
-
-void	init_data(int ac, char **av, t_data *data)
+void	parse_arguments(int ac, char **av, t_data *data)
 {
 	int	i;
 
 	i = 0;
-	memset(data, 0, sizeof(t_data));
 	while (++i < ac)
 	{
 		if (i == 1)
@@ -88,6 +85,13 @@ void	init_data(int ac, char **av, t_data *data)
 				data->num_of_eat = 0;
 		}
 	}
+}
+
+void	init_data(int ac, char **av, t_data *data)
+{
+	memset(data, 0, sizeof(t_data));
+	parse_arguments(ac, av, data);
+	data->is_dead = false;
 	check_input_error(data);
 	data->start_time = get_current_time();
 }
