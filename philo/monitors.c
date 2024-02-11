@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 13:24:49 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/02/11 17:26:12 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/11 18:17:48 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ bool	check_philo(t_data *data)
 			print_message(&data->philo[0], OVER);
 			return (false);
 		}
-		if (get_current_time() - data->philo[i].last_eat >= data->time_to_die)
+		if (get_current_time() - data->philo[i].last_eat > data->time_to_die
+			&& data->philo[i].is_eating == false)
 		{
 			data->is_over = true;
 			pthread_mutex_unlock(&data->sync_mutex);

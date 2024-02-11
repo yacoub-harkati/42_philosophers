@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 05:57:01 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/02/11 18:04:49 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/11 18:19:37 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	philo_take_forks(t_philo *ph)
 	{
 		ft_usleep(ph->data->time_to_die);
 		pthread_mutex_lock(&ph->data->sync_mutex);
+		ph->is_eating = false;
 		ph->data->is_over = true;
 		pthread_mutex_unlock(&ph->data->sync_mutex);
 		return ;
@@ -64,6 +65,7 @@ void	philo_eat(t_philo *ph)
 {
 	philo_take_forks(ph);
 	pthread_mutex_lock(&ph->data->sync_mutex);
+	ph->is_eating = true;
 	ph->last_eat = get_current_time();
 	ph->eat_count++;
 	if (ph->eat_count == ph->data->num_of_eat)
@@ -77,5 +79,8 @@ void	philo_eat(t_philo *ph)
 	pthread_mutex_unlock(&ph->data->sync_mutex);
 	print_message(ph, EAT);
 	ft_usleep(ph->data->time_to_eat);
+	pthread_mutex_lock(&ph->data->sync_mutex);
+	ph->is_eating = false;
+	pthread_mutex_unlock(&ph->data->sync_mutex);
 	philo_release_forks(ph);
 }

@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:18:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/02/11 17:30:05 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/11 18:14:41 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_philo
 	int					id;
 	int					eat_count;
 	long				last_eat;
-	bool				*is_dead;
+	bool				is_eating;
 	pthread_mutex_t		*left_fork;
 	pthread_mutex_t		*right_fork;
 	pthread_mutex_t		*print_mutex;
@@ -85,9 +85,7 @@ void					destroy_mutex(t_data *data);
 void					*philo_routine(void *philo);
 void					*monitor(void *philo);
 void					start_threads(t_data *data);
-// bool					check_full_philo(t_data *data);
 bool					check_philo(t_data *data);
-// bool					dead_loop(t_data *data);
 void					print_error_exit(char *error_message);
 void					check_input_error(t_data *data);
 void					philo_eat(t_philo *ph);
