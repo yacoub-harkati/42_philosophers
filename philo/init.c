@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:59:05 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/02/11 17:17:40 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/11 17:30:21 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	parse_arguments(int ac, char **av, t_data *data)
 		if (i == 1)
 			data->num_of_philo = ft_atoi(av[i]);
 		else if (i == 2)
-			data->time_to_die = ft_atoi(av[i]) + 1;
+			data->time_to_die = ft_atoi(av[i]);
 		else if (i == 3)
 			data->time_to_eat = ft_atoi(av[i]);
 		else if (i == 4)

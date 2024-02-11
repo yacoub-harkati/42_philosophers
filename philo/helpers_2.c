@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:29:05 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/02/11 16:16:13 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/11 18:02:13 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	ft_max(int a, int b)
 void	print_message(t_philo *philo, int message_type)
 {
 	int	current_time;
-
+	
+	pthread_mutex_lock(&philo->data->sync_mutex);
 	pthread_mutex_lock(&philo->data->print_mutex);
 	current_time = get_current_time() - philo->data->start_time;
 	if (message_type == EAT)
@@ -39,8 +40,11 @@ void	print_message(t_philo *philo, int message_type)
 	else if (message_type == THINK)
 		printf(YELLOW "%d" RESET " %d is thinking\n", current_time, philo->id);
 	else if (message_type == FORK)
-		printf(YELLOW "%d" RESET " %d has taken a fork\n", current_time,
-			philo->id);
+	{
+		if (!philo->data->is_over)
+			printf(YELLOW "%d" RESET " %d has taken a fork\n", current_time,
+				philo->id);
+	}
 	else if (message_type == DIED)
 		printf(YELLOW "%d" RESET " %d " RED "died\n" RESET, current_time,
 			philo->id);
@@ -48,6 +52,7 @@ void	print_message(t_philo *philo, int message_type)
 		printf(YELLOW "%d All philosophers have eaten enough\n" RESET,
 			current_time);
 	pthread_mutex_unlock(&philo->data->print_mutex);
+	pthread_mutex_unlock(&philo->data->sync_mutex);
 }
 
 void	print_error_exit(char *error_message)

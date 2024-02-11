@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 13:19:11 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/02/11 17:11:32 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/11 17:39:31 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	*philo_routine(void *philo)
 	ph = (t_philo *)philo;
 	while (shoul_enter_loop(ph))
 	{
-		philo_think(ph);
 		philo_eat(ph);
+		philo_think(ph);
 		philo_sleep(ph);
 	}
 	return (NULL);

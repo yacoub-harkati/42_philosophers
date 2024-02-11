@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:18:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/02/11 17:09:41 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/11 17:30:05 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PHILO_H
 # include <limits.h>
 # include <pthread.h>
-# include <fcntl.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
