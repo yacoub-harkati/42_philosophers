@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:29:05 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/01/30 02:55:01 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/11 16:16:13 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	print_message(t_philo *philo, int message_type)
 {
 	int	current_time;
 
-	pthread_mutex_lock(philo->print_mutex);
+	pthread_mutex_lock(&philo->data->print_mutex);
 	current_time = get_current_time() - philo->data->start_time;
 	if (message_type == EAT)
 		printf(YELLOW "%d" RESET " %d is eating\n", current_time, philo->id);
@@ -42,12 +42,12 @@ void	print_message(t_philo *philo, int message_type)
 		printf(YELLOW "%d" RESET " %d has taken a fork\n", current_time,
 			philo->id);
 	else if (message_type == DIED)
-		printf(YELLOW "%d" RESET " %d " RED "died\n" RESET, current_time - 1,
+		printf(YELLOW "%d" RESET " %d " RED "died\n" RESET, current_time,
 			philo->id);
 	else if (message_type == OVER)
 		printf(YELLOW "%d All philosophers have eaten enough\n" RESET,
 			current_time);
-	pthread_mutex_unlock(philo->print_mutex);
+	pthread_mutex_unlock(&philo->data->print_mutex);
 }
 
 void	print_error_exit(char *error_message)

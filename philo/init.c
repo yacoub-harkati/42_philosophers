@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:59:05 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/02/11 15:42:57 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/11 16:06:18 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ void	init_data(int ac, char **av, t_data *data)
 {
 	memset(data, 0, sizeof(t_data));
 	parse_arguments(ac, av, data);
-	data->is_dead = false;
 	check_input_error(data);
+	data->is_over = false;
+	data->num_of_full_philo = 0;
 	data->start_time = get_current_time();
 }

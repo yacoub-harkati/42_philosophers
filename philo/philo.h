@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:18:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/02/11 15:42:24 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/11 16:15:29 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ struct					s_data
 	int					time_to_eat;
 	int					time_to_sleep;
 	int					start_time;
-	bool				is_dead;
+	int					num_of_full_philo;
+	bool				is_over;
 	pthread_mutex_t		sync_mutex;
 	pthread_mutex_t		print_mutex;
 	pthread_mutex_t		forks[MAX_PHILO];
@@ -82,11 +83,11 @@ int						ft_max(int a, int b);
 void					init_mutex(t_data *data);
 void					destroy_mutex(t_data *data);
 void					*philo_routine(void *philo);
-void					*monitor_routine(void *philo);
+void					*monitor(void *philo);
 void					start_threads(t_data *data);
-bool					check_all_philo_eat(t_data *data);
-bool					check_any_philo_died(t_data *data);
-bool					dead_loop(t_data *data);
+bool					check_full_philo(t_data *data);
+bool					check_philo_died(t_data *data);
+// bool					dead_loop(t_data *data);
 void					print_error_exit(char *error_message);
 void					check_input_error(t_data *data);
 void					philo_eat(t_philo *ph);
