@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:59:05 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/02/11 17:30:21 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/11 19:11:57 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	destroy_mutex(t_data *data)
 	pthread_mutex_destroy(&data->sync_mutex);
 	pthread_mutex_destroy(&data->print_mutex);
 }
+
 void	parse_arguments(int ac, char **av, t_data *data)
 {
 	int	i;

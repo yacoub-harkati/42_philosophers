@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 13:19:11 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/02/11 17:39:31 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/11 19:12:20 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ bool	shoul_enter_loop(t_philo *ph)
 	pthread_mutex_unlock(&ph->data->sync_mutex);
 	return (true);
 }
+
 void	*philo_routine(void *philo)
 {
 	t_philo	*ph;

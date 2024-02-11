@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:29:05 by yaharkat          #+#    #+#             */
-/*   Updated: 2024/02/11 18:02:13 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/02/11 19:12:07 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_max(int a, int b)
 void	print_message(t_philo *philo, int message_type)
 {
 	int	current_time;
-	
+
 	pthread_mutex_lock(&philo->data->sync_mutex);
 	pthread_mutex_lock(&philo->data->print_mutex);
 	current_time = get_current_time() - philo->data->start_time;
